@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2013_08_13_025840) do
+ActiveRecord::Schema.define(version: 2021_02_03_135301) do
 
   create_table "admin_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "first_name", limit: 25
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 2013_08_13_025840) do
     t.index ["username"], name: "index_admin_users_on_username"
   end
 
+  create_table "admin_users_pages", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "admin_user_id"
+    t.integer "page_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_user_id", "page_id"], name: "index_admin_users_pages_on_admin_user_id_and_page_id"
+  end
+
   create_table "pages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "subject_id"
     t.string "name"
@@ -33,6 +41,17 @@ ActiveRecord::Schema.define(version: 2013_08_13_025840) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["permalink"], name: "index_pages_on_permalink"
     t.index ["subject_id"], name: "index_pages_on_subject_id"
+  end
+
+  create_table "section_edits", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "admin_user_id"
+    t.bigint "section_id"
+    t.string "sumarry"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_user_id", "section_id"], name: "index_section_edits_on_admin_user_id_and_section_id"
+    t.index ["admin_user_id"], name: "index_section_edits_on_admin_user_id"
+    t.index ["section_id"], name: "index_section_edits_on_section_id"
   end
 
   create_table "sections", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
