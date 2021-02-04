@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   
   layout "admin"
-
+  before_action :cofirm_logged_in
   def index
     @pages = Page.sorted
   end
@@ -23,7 +23,7 @@ class PagesController < ApplicationController
       redirect_to(:action => 'index')
     else
       @subjects = Subject.all
-      @page_count = Page.count
+      @page_count = Page.count + 1
       render('new')
     end
   end

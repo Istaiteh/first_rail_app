@@ -1,7 +1,7 @@
 class Subject < ActiveRecord::Base
     has_many :pages
     validates_presence_of :name
-    validate_length_of :name, :maximum => 255 
+    validates_length_of :name, :maximum => 255 
 
 
     scope :visible, lambda { where(:visible => true) }

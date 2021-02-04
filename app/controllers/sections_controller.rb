@@ -1,7 +1,7 @@
 class SectionsController < ApplicationController
   
   layout "admin"
-
+  before_action :cofirm_logged_in
   def index
     @sections = Section.sorted
   end
@@ -12,7 +12,7 @@ class SectionsController < ApplicationController
 
   def new
     @section = Section.new({:name => "Default"})
-    @sections_count = Sections.count + 1
+    @sections_count = Section.count + 1
     @pages = Page.all
   end
 

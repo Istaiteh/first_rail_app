@@ -1,6 +1,7 @@
 class DemoController < ApplicationController
 
   layout "admin"
+  before_action :cofirm_logged_in
   def index
   end
 
