@@ -18,5 +18,9 @@ class DemoController < ApplicationController
   def lynda
     redirect_to("http://lynda.com")
   end
+  def text_helpers 
+  end 
+  def escape_output
 
+  end
 end
