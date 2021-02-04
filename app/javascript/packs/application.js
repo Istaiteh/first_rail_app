@@ -8,6 +8,8 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+var someVar = "Hello World";
+require("packs/demo")
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

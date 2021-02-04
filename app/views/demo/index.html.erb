@@ -11,3 +11,11 @@
 <%= link_to('Sections', {:controller => 'sections',:action => 'index'}) %><br />
 <%= link_to('Text Helpers', {:action => 'text_helpers'}) %><br />
 <%= link_to('Sandbox', {:action => 'escape_output'}) %><br />
+
+
+<% name = "Kevin" %>
+<% name = "Sorry!'); alert('I hacked you!" %>
+<%# 
+<%= link_to('Roar', '#', :onclick => "jsRoar('#{j(name)}'); return true;") %>
+
+<%# <%= javascript_tag("jsRoar('#{j(name)}');") %> 
