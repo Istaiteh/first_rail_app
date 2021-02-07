@@ -2,8 +2,13 @@ class SectionsController < ApplicationController
   
   layout "admin"
   before_action :cofirm_logged_in
+  before_action :find_page
   def index
-    @sections = Section.sorted
+    if @page
+      @sections = @page.sections.sorted 
+    else
+      @sections = Section.sorted
+    end 
   end
 
   def show
@@ -20,7 +25,7 @@ class SectionsController < ApplicationController
     @section = Section.new(section_params)
     if @section.save
       flash[:notice] = "Section created successfully."
-      redirect_to(:action => 'index')
+      redirect_to(:action => 'index', :page_id => @page.id)
     else
       @sections_count = Section.count
       @pages = Page.all
@@ -38,7 +43,7 @@ class SectionsController < ApplicationController
     @section = Section.find(params[:id])
     if @section.update(section_params)
       flash[:notice] = "Section updated successfully."
-      redirect_to(:action => 'show', :id => @section.id)
+      redirect_to(:action => 'show', :id => @section.id,  :page_id => @page.id)
     else
       @sections_count = Section.count
       @pages = Page.all
@@ -53,7 +58,7 @@ class SectionsController < ApplicationController
   def destroy
     section = Section.find(params[:id]).destroy
     flash[:notice] = "Section destroyed successfully."
-    redirect_to(:action => 'index')
+    redirect_to(:action => 'index',  :page_id => @page.id)
   end
 
 
@@ -61,6 +66,12 @@ class SectionsController < ApplicationController
 
     def section_params
       params.require(:section).permit(:page_id, :name, :position, :visible, :content_type, :content)
+    end
+
+    def find_page
+      if params[:page_id]
+        @page = Page.find(params[:page_id])
+      end
     end
 
 end

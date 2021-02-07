@@ -3,7 +3,7 @@
 <div class="subjects new">
   <h2>Create Subject</h2>
 
-  <%= form_for(:subject, :url => {:action => 'create'}) do |f| %>
+  <%= form_for(:subject, :url => {:action => 'create', :subject_id => @subject.id}) do |f| %>
 
    <%= render(:partial => "form", :locals => {:f => f})%>
    
